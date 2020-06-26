@@ -35,7 +35,7 @@ class Cart extends React.Component {
                 {
                     data.map((item => {
                         return (
-                            <div style={{ border: "1px solid black", display: "flex", flexDirection: "column" }}>
+                            <div style={{ border: "1px solid black", display: "flex", flexDirection: "column" }} key={item.id}>
                                 <img src={item.src} alt={item.id} width="100" height="100" />
                                 <h3>{item.brand}</h3>
                                 <p>{item.price}</p>

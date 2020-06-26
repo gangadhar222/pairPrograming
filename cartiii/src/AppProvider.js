@@ -1,5 +1,6 @@
 import React, { createContext, Component } from 'react';
 import data from './data.json';
+import {Redirect} from 'react-router-dom'
 export const AppContext = createContext();
 
 export class AppProvider extends Component {
@@ -9,7 +10,8 @@ export class AppProvider extends Component {
         this.state = {
             data: data,
             cart: [],
-            orderArray: []
+            orderArray: [],
+            isAuth: false
         }
     }
 
@@ -18,11 +20,11 @@ export class AppProvider extends Component {
     }
 
     addToCart = (payload) => {
-        const { data, cart } = this.state
-        const item = data.find(item => item.id === payload)
-        this.setState({
-            cart: [...cart, item]
-        })
+            const { data, cart } = this.state
+            const item = data.find(item => item.id === payload)
+            this.setState({
+                cart: [...cart, item]
+            })
     }
 
     getCartData = () => {
@@ -30,15 +32,15 @@ export class AppProvider extends Component {
     }
 
     orderDetails = (payload) => {
-        const {state,data} = payload
-        let temp=[state.name,state.phone,state.email,data]
+        const { state, data } = payload
+        let temp = [state.name, state.phone, state.email, data]
 
         this.setState({
-            orderArray:[...this.state.orderArray,temp]
+            orderArray: [...this.state.orderArray, temp]
         })
     }
 
-    getOrderDetails= ()=>{
+    getOrderDetails = () => {
         return this.state.orderArray
     }
 

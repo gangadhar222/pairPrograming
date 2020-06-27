@@ -1,6 +1,6 @@
 import React, { createContext, Component } from 'react';
 import data from './data.json';
-import {Redirect} from 'react-router-dom'
+import history from './components/History.js'
 export const AppContext = createContext();
 
 export class AppProvider extends Component {
@@ -20,11 +20,16 @@ export class AppProvider extends Component {
     }
 
     addToCart = (payload) => {
+        if (!this.state.isAuth) {
+            history.push('/login')
+        }
+        else {
             const { data, cart } = this.state
             const item = data.find(item => item.id === payload)
             this.setState({
                 cart: [...cart, item]
             })
+        }
     }
 
     getCartData = () => {
@@ -36,8 +41,21 @@ export class AppProvider extends Component {
         let temp = [state.name, state.phone, state.email, data]
 
         this.setState({
-            orderArray: [...this.state.orderArray, temp]
+            orderArray: [...this.state.orderArray, temp],
+            cart:[]
         })
+        history.push('/orders')
+    }
+
+    validateUser = (user) => {
+        console.log(user)
+        if (user.userName === "admin" && user.password === "admin") {
+            console.log('Yes working')
+            this.setState({
+                isAuth: true
+            })
+            history.push('/')
+        }
     }
 
     getOrderDetails = () => {
@@ -50,7 +68,8 @@ export class AppProvider extends Component {
             addToCart: this.addToCart,
             getCartData: this.getCartData,
             orderDetails: this.orderDetails,
-            getOrderDetails: this.getOrderDetails
+            getOrderDetails: this.getOrderDetails,
+            validateUser: this.validateUser
         }
         return (
             <div>

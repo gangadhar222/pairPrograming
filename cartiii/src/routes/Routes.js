@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Home from './Home';
 import Products from './Products';
@@ -13,10 +13,10 @@ const Routes = () => {
                 <Switch>
                     <Route exact path="/" render={()=><Home />} />
                     <Route exact path="/products" render={()=><Products />} />
-                    <Route exact path="/products/:id" render={(props)=><ProductDetails {...props}/>} />
-                    <Route exact path="/login" render={()=><Login />} />
-                    <Route exact path="/cart" render={()=><Cart />} />
-                    <Route exact path="/orders" render={()=><Orders />} />
+                    <Route path="/products/:id" render={(props)=><ProductDetails {...props}/>} />
+                    <Route path="/login" component = {Login}/>
+                    <Route path="/cart" render={()=><Cart />} />
+                    <Route path="/orders" render={()=><Orders />} />
                 </Switch>
         </div>
     )

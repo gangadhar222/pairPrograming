@@ -12,9 +12,11 @@ export default function Orders() {
                 orderArray.map((item => {
                     return (
                         <div style={{ border: "1px solid black", display: "flex", flexDirection: "column" }}>
-                            <p>{item[0]}</p>
-                            <p>{item[1]}</p>
-                            <p>{item[2]}</p>
+                            <h3>User details</h3>
+                            <p>Name: {item[0]}</p>
+                            <p>Mobile: {item[1]}</p>
+                            <p>Email: {item[2]}</p>
+                            <h3>Order Summary</h3>
                             {item[3].map(item => {
                                 return (
                                     <div>
